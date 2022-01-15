@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+    "uniform",
+    "uniform_parser"
+]
