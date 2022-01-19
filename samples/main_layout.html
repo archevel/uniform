@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{Uniform_AppName}}</title>
+    <style>
+      html {
+        font-size: 17px;
+        font-family: sans-serif;
+      }
+      h1 {
+        font-size: 3rem;
+      }
+      h2 {
+        font-size: 2.5rem;
+      }
+      h3 {
+        font-size: 2rem;
+      }
+      body {  
+        width:100vw;
+        height:100vh;
+        padding:0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: 0.33fr 1fr 0.5fr;
+        grid-template-rows: 2rem 1fr 2rem;
+        gap: 0.5rem 0.5rem;
+        grid-auto-flow: row;
+        grid-template-areas:
+          "header header header"
+          "menu main help"
+          "footer footer footer";
+      }
+
+      header { 
+        grid-area: header;
+        background-color: lightblue;
+      }
+
+      nav { 
+        grid-area: menu; 
+        background-color: lightgreen;
+      }
+
+      main { 
+        grid-area: main;
+        background-color: lightgrey;
+      }
+
+      aside { 
+        grid-area: help; 
+        background-color: lightyellow;
+      }
+
+      footer {
+        grid-area: footer; 
+        background-color: lightseagreen;
+      }
+
+      @media (max-width: 900px) {
+        html { font-size: 15px; }
+        body {
+          grid-template-columns: 15rem 1fr min-content;
+        }
+        aside>section:target { 
+          width: 20rem;
+        }
+      }
+
+      @media (max-width: 400px) {
+        html { font-size: 13px; }
+        body {
+          display: flex;
+          flex-direction: column;
+          row-gap: 0;
+        }
+        main {
+          flex-grow: 2;
+        }
+        nav>ul {
+          display:none;
+        }
+        nav>ul:target {
+          display:block;
+        }
+      }
+
+      aside>section {
+        display:none;
+      }
+      aside>section:target {
+        display:block;
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>{{Uniform_AppName}}</header>
+    <main>
+        main
+        <a href="#help"/>show help</a>
+    </main>
+    <aside>
+      <section id="help">some help<a href="#"/>back</a></section>
+    </aside>
+
+    <nav>
+      <a href="#menu" />{{Uniform_Menu}}</a>
+      <ul id="menu">
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+      </ul>
+    </nav>
+    <footer>footer</footer>
+  </body>
+</html>
