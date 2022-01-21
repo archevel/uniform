@@ -79,11 +79,19 @@
         main {
           flex-grow: 2;
         }
+        nav {
+          position:fixed;
+          bottom: 0px;
+          width: 100%;
+        }
         nav>ul {
           display:none;
         }
         nav>ul:target {
           display:block;
+        }
+        footer {
+          padding-bottom: 2em;
         }
       }
 
@@ -98,14 +106,6 @@
   </head>
   <body>
     <header>{{Uniform_AppName}}</header>
-    <main>
-        main
-        <a href="#help"/>show help</a>
-    </main>
-    <aside>
-      <section id="help">some help<a href="#"/>back</a></section>
-    </aside>
-
     <nav>
       <a href="#menu" />{{Uniform_Menu}}</a>
       <ul id="menu">
@@ -114,6 +114,26 @@
         <li><a href="#">Link</a></li>
       </ul>
     </nav>
+    <main>
+        <h2>{{Entity_Title}}</h2>
+        <a href="#help"/>show help</a>
+        <section>
+
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, justo sit amet vestibulum scelerisque, nisl augue viverra ex, et condimentum ligula ipsum non purus. Vivamus tempus eu justo non feugiat. Nullam turpis justo, tincidunt eget leo nec, scelerisque tristique augue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque fermentum lacinia nisi, sed malesuada neque consequat sed. Aenean molestie, tellus eu dignissim dignissim, sem nulla euismod tellus, et aliquam nibh dolor in sapien. Cras vulputate vestibulum enim, ut eleifend lorem elementum a. Praesent enim eros, ullamcorper eu erat et, ornare auctor velit. Suspendisse placerat sodales lectus sed rutrum. Donec pellentesque condimentum magna, ut tincidunt tortor tristique ut. Donec elementum egestas elit tempus convallis.</p>
+          
+          <p>Phasellus hendrerit orci ipsum. Vivamus finibus ligula vitae ligula ullamcorper gravida ut sit amet diam. Suspendisse ac facilisis metus. In at nisl eget velit maximus viverra ac non tellus. Aenean nec augue vitae elit mattis venenatis. Nulla fringilla rutrum risus vel suscipit. Integer gravida pellentesque purus vitae posuere. Duis quis varius lorem, vel mollis arcu. Curabitur semper sollicitudin lorem, in venenatis diam venenatis sit amet. Aliquam augue leo, aliquam nec commodo eget, ultricies sit amet justo. Fusce ante tellus, euismod eu mauris non, aliquam ornare nisi. Donec sed eros congue, efficitur metus ac, aliquam leo. Sed non efficitur tellus, non tempor sem.</p>
+          
+          <p>Sed eget lorem sit amet ligula cursus venenatis quis vitae mauris. Aliquam ornare arcu dui, id condimentum leo auctor sit amet. Integer laoreet est in sem interdum cursus. Praesent tincidunt ex eu lorem sagittis consectetur. Donec luctus felis ut tellus vulputate, nec tincidunt magna rhoncus. Suspendisse tristique non lectus vel sagittis. Nam vel magna eu lorem tincidunt feugiat et eu nulla. Nullam porttitor, tortor sed pulvinar maximus, libero elit lobortis est, tempus posuere odio leo at eros. Curabitur id luctus tortor, sed fringilla nibh. In vitae condimentum erat, eu hendrerit nisl. Nam aliquet, sem ut eleifend pulvinar, elit quam commodo ante, sit amet elementum sem leo id diam. Nam leo magna, lacinia in elit ut, accumsan blandit eros. In eget eleifend dui. Phasellus iaculis, nisi sit amet eleifend placerat, dolor velit scelerisque sem, ultrices interdum felis tortor id nulla. Donec cursus ante pretium, vulputate nisl eget, ornare nisi.</p>
+          
+          <p>Proin pretium eros quam, nec mattis lorem porttitor feugiat. Proin vulputate viverra tincidunt. Nam scelerisque tempus leo, in feugiat erat feugiat vel. Phasellus neque sapien, tempor vel congue ac, pretium quis erat. Quisque et orci vitae sem vulputate rhoncus. Integer et est efficitur, sodales tortor vitae, commodo enim. Duis varius purus ac purus condimentum pharetra eget vel arcu. Etiam dictum consectetur ipsum, quis placerat est pretium at. Aliquam nec dui posuere, mattis enim ac, rhoncus lectus. In ultricies vulputate arcu in scelerisque. Donec consequat vel leo vel elementum. Ut hendrerit fringilla metus, vitae luctus justo semper sit amet. Suspendisse potenti. Duis mi ipsum, tempor at blandit vitae, lobortis eget libero.</p>
+          
+          <p>Aenean ullamcorper vel enim sed vulputate. Vestibulum vel ligula urna. Mauris ut neque porta, finibus nunc ac, auctor quam. Vivamus ac mauris sed justo mollis condimentum. Etiam mi sapien, porttitor ac vulputate ac, tincidunt a dolor. Morbi vitae magna at nisi ullamcorper congue nec in ipsum. Fusce feugiat mi enim. Quisque ut nisl aliquam dolor elementum aliquam eu ac nisi. Sed non egestas tortor. Donec nec facilisis sapien. Donec non elit pulvinar, hendrerit metus id, sollicitudin eros. Proin tincidunt velit sed lectus egestas, quis posuere nisi porta. Nullam varius sed dolor at luctus. Vestibulum at arcu in urna elementum vestibulum.</p> </section>
+    </main>
+    <aside>
+      <section id="help">some help<a href="#"/>back</a></section>
+    </aside>
+
+    
     <footer>footer</footer>
   </body>
 </html>
