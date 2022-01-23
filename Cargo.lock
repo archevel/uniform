@@ -33,6 +33,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "uniform_localizor"
+version = "0.1.0"
+dependencies = [
+ "uniform_model",
+]
+
+[[package]]
 name = "uniform_model"
 version = "0.1.0"
 
