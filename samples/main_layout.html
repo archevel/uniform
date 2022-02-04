@@ -101,6 +101,40 @@
         display:block;
       }
 
+      input,label,table {
+        margin: 0.5rem;
+        line-height: 1.2rem;
+      }
+
+      input:invalid {
+        border: 2px solid red;
+      }
+
+      input:invalid + span::before {
+        content: '✖';
+        color: red;
+      }
+
+      input:valid + span::before {
+        content: '✓';
+        color: green;
+      }
+
+      label > a {
+        text-decoration: none;
+      }
+      label > a::before {
+        left: 4px;
+        position: relative;
+        content: '\FF1F';
+        color: blue;
+        font-weight: bolder;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0rem;
+      }
     </style>
   </head>
   <body>
@@ -108,13 +142,40 @@
     <nav>
       <a href="#menu" />{{Uniform_Menu}}</a>
       <ul id="menu">
-        <li><a href="#">Link</a></li>
+        <li><a href="#">{{Entity_Menu}}</a></li>
         <li><a href="#">Link</a></li>
         <li><a href="#">Link</a></li>
       </ul>
     </nav>
     <main>
         <h2>{{Entity_Title}}</h2>
+        <form id={{Entity}} name="{{Entity}}" action="/{{lang}}/{{Entity}}/<entity_id>[?returnUrl={{super_entity_path}}]" method="post" lang="{{lang}}"></form>
+
+        <label id="{{Entity.Prop1_label}}" for="{{Entity.Prop1}}">{{Entity.Prop1_label}}<a href="#{{Entity.Prop1}}_help" ></a></label>
+        
+        <input id="{{Entity.Prop1}}" name="{{Entity.Prop1}}" type="text" pattern="..+" form="{{Entitiy}}" value="{{Entity.Prop1_value}}"/>
+        <span></span>
+        
+        <form id="{{Entity.Prop2_search}}" name="{{Entity.Prop2_search}}" action="/{{lang}}/{{Entity}}/<entity_id>/{{Prop2}}?returnUrl=/{{lang}}/{{Entity}}/<entity_id>" method="get" />
+        <label for="{{Entity.Prop2}}">{{Entity.Prop2}}</label>
+        <input id="{{Entity.Prop2}}" name="{{Entity.Prop2}}" type="text" pattern="\d+" form="{{Entity.Prop2_search}}" title="{{Entity.Prop2_shorthelp}}"/>
+        <span></span>
+        <input type="submit" form="{{Entity.Prop2_search}}" value="{{Entity.Prop2_search}}"/>
+        <table>
+            <thead>
+                <tr>
+                    <th>{{Entity2_overview.prop1}}</th>
+                    <th>{{Entity2_overview.prop2}}</th>
+                </tr>
+            <thead>
+            <tbody>
+                <tr>
+                    <td>Entity2_overview.prop1</td>
+                    <td>Entity2_overview.prop2</td>
+                </tr>
+            </tbody>
+        </table>
+
         <a href="#help"/>show help</a>
         <section>
 
@@ -130,6 +191,10 @@
     </main>
     <aside>
       <section id="help">some help<a href="#"/>back</a></section>
+      <section id="{{Entity.Prop1}}_help"><a href="#{{Entity.Prop1_label}}"/>{{Entity.Prop1_BackToLabel}}</a>
+        <h3>Entity.Prop2_help_title</h3>
+        <p>Entity.Prop2_help</p>
+      </section>
     </aside>
 
     
