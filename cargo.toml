@@ -5,4 +5,5 @@ members = [
     "uniform_model",
     "uniform_localizor",
     "uniform_parser",
+    "uniform_generator"
 ]
