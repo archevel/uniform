@@ -48,7 +48,8 @@ fn localize_entity(e: &Entity) -> String {
 }
 
 pub fn localize(spec: Vec<Entity>) -> String {
-    spec.iter().map(localize_entity).next().unwrap()
+    let localizations: Vec<String> = spec.iter().map(localize_entity).collect();
+    localizations.join("\n")
 }
 
 #[cfg(test)]
@@ -57,7 +58,7 @@ mod tests {
     use uniform_model::{PropType};
 
     #[test]
-    fn should_localize_simple_enum_entity() {
+    fn localize_template_should_handle_simple_enum_entity() {
         let input:Vec<Entity> = vec![Entity::EnumEntity("Entity".to_string(), vec!["Helo".to_string(), "Bye".to_string()])];
 
         let result = localize(input);
@@ -68,7 +69,7 @@ mod tests {
     }
 
     #[test]
-    fn should_localize_simple_enum_entity2() {
+    fn localize_template_should_handle_simple_enum_entity2() {
         let input:Vec<Entity> = vec![Entity::EnumEntity("Entity2".to_string(), vec!["Bag".to_string(), "Rod".to_string()])];
 
         let result = localize(input);
@@ -79,7 +80,7 @@ mod tests {
     }
 
     #[test]
-    fn localization_key_order_is_dependant_on_order_in_vectors() {
+    fn localize_template_key_order_is_dependant_on_order_in_vectors() {
         let input:Vec<Entity> = vec![Entity::EnumEntity("Entity".to_string(), vec!["Rod".to_string(), "Bag".to_string()])];
 
         let result = localize(input);
@@ -90,7 +91,7 @@ mod tests {
     }
 
     #[test]
-    fn should_localize_simple_regular_entity_with_one_prop() {
+    fn localize_template_should_handle_simple_regular_entity_with_one_prop() {
         let input:Vec<Entity> = vec![Entity::Entity("Abro".to_string(), vec![OverviewProp::Prop("rod".to_string())], vec![Prop::Prop("rod".to_string(), PropType::Int)])];
         
         let result = localize(input);
@@ -108,7 +109,7 @@ mod tests {
     }
 
     #[test]
-    fn should_localize_simple_regular_entity_with_sub_prop() {
+    fn localize_template_should_handle_simple_regular_entity_with_sub_prop() {
         let input:Vec<Entity> = vec![Entity::Entity("Emptor".to_string(), vec![OverviewProp::SubProp("rod".to_string(), "foo".to_string())], vec![Prop::Prop("rod".to_string(), PropType::Entity("Fooer".to_string()))])];
         
         let result = localize(input);
@@ -123,5 +124,61 @@ mod tests {
             Emptor.rod_placeholder?=Emptor.rod_placeholder\n\
             Emptor.rod_help?=Emptor.rod_help\n\
             Emptor.rod_help_title?=Emptor.rod_help_title");
+    }
+
+    #[test]
+    fn localize_template_should_handle_simple_regular_entity_with_mix_of_props() {
+        let input:Vec<Entity> = vec![
+            Entity::Entity("Emptor".to_string(), 
+                vec![OverviewProp::SubProp("rod".to_string(), "foo".to_string()), OverviewProp::Prop("boo".to_string())], 
+                vec![
+                    Prop::Prop("boo".to_string(), PropType::Int), 
+                    Prop::Prop("rod".to_string(), PropType::Entity("Fooer".to_string()))
+                ])
+            ];
+        
+        let result = localize(input);
+
+        assert_eq!(result, 
+            "Emptor_title=Emptor_title\n\
+            Emptor_menu=Emptor_menu\n\
+            Emptor_help?=Emptor_help\n\
+            Emptor_overview.rod.foo=Emptor_overview.rod.foo\n\
+            Emptor_overview.boo=Emptor_overview.boo\n\
+            Emptor.boo_label=Emptor.boo_label\n\
+            Emptor.boo_shorthelp=Emptor.boo_shorthelp\n\
+            Emptor.boo_placeholder?=Emptor.boo_placeholder\n\
+            Emptor.boo_help?=Emptor.boo_help\n\
+            Emptor.boo_help_title?=Emptor.boo_help_title\n\
+            Emptor.rod_label=Emptor.rod_label\n\
+            Emptor.rod_shorthelp=Emptor.rod_shorthelp\n\
+            Emptor.rod_placeholder?=Emptor.rod_placeholder\n\
+            Emptor.rod_help?=Emptor.rod_help\n\
+            Emptor.rod_help_title?=Emptor.rod_help_title");
+    }
+
+    #[test]
+    fn localize_template_should_handle_all_entities_provided() {
+        let input:Vec<Entity> = vec![
+            Entity::EnumEntity("Entity".to_string(), vec!["Rod".to_string(), "Bag".to_string()]),
+            Entity::Entity("Abro".to_string(), vec![OverviewProp::Prop("rod".to_string())], vec![Prop::Prop("rod".to_string(), PropType::Int)]),
+            Entity::EnumEntity("Caveat".to_string(), vec!["Ihildur".to_string(), "Oulipsius".to_string()]),
+        ];
+        let result = localize(input);
+
+        assert_eq!(result, 
+            "Entity_Rod=Entity_Rod\n\
+            Entity_Bag=Entity_Bag\n\
+            Abro_title=Abro_title\n\
+            Abro_menu=Abro_menu\n\
+            Abro_help?=Abro_help\n\
+            Abro_overview.rod=Abro_overview.rod\n\
+            Abro.rod_label=Abro.rod_label\n\
+            Abro.rod_shorthelp=Abro.rod_shorthelp\n\
+            Abro.rod_placeholder?=Abro.rod_placeholder\n\
+            Abro.rod_help?=Abro.rod_help\n\
+            Abro.rod_help_title?=Abro.rod_help_title\n\
+            Caveat_Ihildur=Caveat_Ihildur\n\
+            Caveat_Oulipsius=Caveat_Oulipsius");  
     }
 }
