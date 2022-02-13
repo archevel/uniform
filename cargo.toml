@@ -3,7 +3,7 @@
 members = [
     "uniform",
     "uniform_model",
-    "uniform_localizor",
+    "uniform_patterner",
     "uniform_parser",
     "uniform_generator"
 ]

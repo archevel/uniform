@@ -29,11 +29,13 @@ dependencies = [
 name = "uniform"
 version = "0.1.0"
 dependencies = [
+ "uniform_model",
  "uniform_parser",
+ "uniform_patterner",
 ]
 
 [[package]]
-name = "uniform_localizor"
+name = "uniform_generator"
 version = "0.1.0"
 dependencies = [
  "uniform_model",
@@ -48,6 +50,13 @@ name = "uniform_parser"
 version = "0.1.0"
 dependencies = [
  "nom",
+ "uniform_model",
+]
+
+[[package]]
+name = "uniform_patterner"
+version = "0.1.0"
+dependencies = [
  "uniform_model",
 ]
 

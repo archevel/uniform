@@ -1,5 +1,5 @@
 [package]
-name = "uniform_localizor"
+name = "uniform_patterner"
 version = "0.1.0"
 edition = "2021"
 

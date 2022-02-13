@@ -6,4 +6,6 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+uniform_model = { path = "../uniform_model" }
 uniform_parser = { path = "../uniform_parser" }
+uniform_patterner = { path = "../uniform_patterner" }
