@@ -7,3 +7,6 @@ edition = "2021"
 
 [dependencies]
 uniform_model = { path = "../uniform_model" }
+
+[dev-dependencies]
+uniform_parser = { path = "../uniform_parser" }

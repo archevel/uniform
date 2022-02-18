@@ -4,4 +4,4 @@ pub use crate::localizor::localize;
 
 mod templator;
 
-pub use crate::templator::template;
+pub use crate::templator::template_for_edit;

@@ -58,6 +58,7 @@ name = "uniform_patterner"
 version = "0.1.0"
 dependencies = [
  "uniform_model",
+ "uniform_parser",
 ]
 
 [[package]]

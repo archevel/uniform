@@ -1,5 +1,5 @@
 fn print_localization_template(entities: Vec<uniform::model::Entity>) {
-    let localizations = uniform::patterner::localize(entities);
+    let localizations = uniform::patterner::localize(&entities);
     println!("{:?}", localizations)
 }
 

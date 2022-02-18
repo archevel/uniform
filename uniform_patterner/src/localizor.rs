@@ -1,4 +1,5 @@
 
+use std::collections::HashMap;
 use uniform_model::{Entity, OverviewProp, Prop};
 
 fn localize_property(entity_name: &str, prop: &Prop) -> String {
@@ -82,9 +83,32 @@ fn localize_entity(e: &Entity) -> String {
     }
 }
 
-pub fn localize(spec: Vec<Entity>) -> String {
+pub fn localize(spec: &Vec<Entity>) -> String {
     let localizations: Vec<String> = spec.iter().map(localize_entity).collect();
     localizations.join("\n")
+}
+
+fn clean_dictionary_key(key: &str) -> &str {
+    key.trim()
+}
+
+fn clean_dictionary_value(val: &str) -> &str {
+    // TODO: Should all values be HTML encoded or should that be handled by the templator? 
+    val.trim()
+}
+
+pub fn to_localization_dictionary(input: &str) -> HashMap<&str, &str> {
+    let mut dict = HashMap::new();
+    for line in input.split("\n") {
+        let mut splitter = line.splitn(2, "=");
+        let key = splitter.next().expect(&("Malformed localization file: ".to_string() + line));
+        let value = splitter.next().expect(&("Malformed localization file: ".to_string() + line));
+        let clean_key = clean_dictionary_key(key);
+        let clean_value = clean_dictionary_value(value);
+        dict.insert(clean_key, clean_value);
+    }
+    
+    return dict;
 }
 
 #[cfg(test)]
@@ -99,7 +123,7 @@ mod tests {
             vec!["Helo".to_string(), "Bye".to_string()],
         )];
 
-        let result = localize(input);
+        let result = localize(&input);
 
         assert_eq!(
             result,
@@ -115,7 +139,7 @@ mod tests {
             vec!["Bag".to_string(), "Rod".to_string()],
         )];
 
-        let result = localize(input);
+        let result = localize(&input);
 
         assert_eq!(
             result,
@@ -131,7 +155,7 @@ mod tests {
             vec!["Rod".to_string(), "Bag".to_string()],
         )];
 
-        let result = localize(input);
+        let result = localize(&input);
 
         assert_eq!(
             result,
@@ -148,7 +172,7 @@ mod tests {
             vec![Prop::Prop("rod".to_string(), PropType::Int)],
         )];
 
-        let result = localize(input);
+        let result = localize(&input);
 
         assert_eq!(
             result,
@@ -175,7 +199,7 @@ mod tests {
             )],
         )];
 
-        let result = localize(input);
+        let result = localize(&input);
 
         assert_eq!(
             result,
@@ -205,7 +229,7 @@ mod tests {
             ],
         )];
 
-        let result = localize(input);
+        let result = localize(&input);
 
         assert_eq!(
             result,
@@ -244,7 +268,7 @@ mod tests {
                 vec!["Ihildur".to_string(), "Oulipsius".to_string()],
             ),
         ];
-        let result = localize(input);
+        let result = localize(&input);
 
         assert_eq!(
             result,
@@ -262,5 +286,16 @@ mod tests {
             Caveat_Ihildur=Caveat_Ihildur\n\
             Caveat_Oulipsius=Caveat_Oulipsius"
         );
+    }
+
+    #[test]
+    fn localization_can_be_converted_to_flat_dictionary() {
+        let input = "Entity_Rod=Entity_Rod_value\n\
+                     Entity_Bag=Entity_Bag_val";
+
+        let result = to_localization_dictionary(input);
+        assert_eq!(result.len(), 2);
+        assert_eq!(result["Entity_Rod"], "Entity_Rod_value");
+        assert_eq!(result["Entity_Bag"], "Entity_Bag_val");
     }
 }
